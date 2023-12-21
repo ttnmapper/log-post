@@ -1,5 +1,7 @@
 <?php
-$logfile = 'logs/'.date('Y-m-d H_i_s').'.txt';
+$method = $_SERVER['REQUEST_METHOD'];
+
+$logfile = 'logs/'.$method."_".date('Y-m-d H_i_s').'.txt';
 
 $server = json_encode($_SERVER, JSON_PRETTY_PRINT);
 file_put_contents($logfile, "Server:\n".$server."\n\n", FILE_APPEND | LOCK_EX);
