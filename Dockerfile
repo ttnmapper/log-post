@@ -4,4 +4,5 @@ FROM php:apache
 RUN a2enmod headers
 
 COPY . /var/www/html/
+RUN mkdir -p /var/www/html/logs
 RUN chmod -R 777 /var/www/html/logs
