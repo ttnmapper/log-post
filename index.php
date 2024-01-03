@@ -10,6 +10,11 @@ $headers = json_encode(getallheaders(), JSON_PRETTY_PRINT);
 file_put_contents($logfile, "Headers:\n".$headers."\n\n", FILE_APPEND | LOCK_EX);
 
 $received = file_get_contents('php://input');
-file_put_contents($logfile, "Body:\n===\n".$received."\n===", FILE_APPEND | LOCK_EX);
+$contentType = $_SERVER["CONTENT_TYPE"];
+if($contentType == "application/json") {
+    file_put_contents($logfile, "Body:\n===\n" . $received . "\n===", FILE_APPEND | LOCK_EX);
+} else {
+    file_put_contents($logfile, "Body:\n===\n" . base64_encode($received) . "\n===", FILE_APPEND | LOCK_EX);
+}
 
 ?>
